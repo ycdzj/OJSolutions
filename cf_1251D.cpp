@@ -58,7 +58,7 @@ int main() {
     int t;
     scanf("%d", &t);
     while(t--) {
-        scanf("%d%lld", &n, &s);    
+        scanf("%d%lld", &n, &s);
         vector<Oper> ops;
         for(int i = 0; i < n; i++) {
             int l, r;
