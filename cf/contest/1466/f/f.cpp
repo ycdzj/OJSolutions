@@ -1,6 +1,8 @@
 // ----------------------Template Start----------------------
 #include <cstdio>
 #include <cstring>
+#include <cstdlib>
+#include <string>
 #include <iostream>
 #include <vector>
 #include <map>
@@ -8,9 +10,12 @@
 #include <queue>
 #include <algorithm>
 #include <numeric>
+#include <unordered_map>
+#include <unordered_set>
+#include <bitset>
 using namespace std;
 
-class IO {
+class Io {
 public:
     static void read(int &val) { scanf("%d", &val); }
     static void read(long long &val) { scanf("%lld", &val); }
@@ -21,10 +26,16 @@ public:
         scanf("%s", buffer);
         val = buffer;
     }
-    static void read_n(vector<int> &val, int n) {
+    static void read(vector<int> &val, int n) {
         val.resize(n);
         for (int i = 0; i < n; i++) {
             scanf("%d", &val[i]);
+        }
+    }
+    static void read(vector<long long> &val, int n) {
+        val.resize(n);
+        for (int i = 0; i < n; i++) {
+            scanf("%lld", &val[i]);
         }
     }
 
@@ -41,6 +52,15 @@ public:
         }
         putchar('\n');
     }
+    static void write(const vector<long long> &val) {
+        for (int i = 0; i < val.size(); i++) {
+            if (i > 0) {
+                putchar(' ');
+            }
+            printf("%lld", val[i]);
+        }
+        putchar('\n');
+    }
 };
 
 class Mod {
@@ -49,9 +69,9 @@ public:
 
     explicit Mod(int mod_) : mod(mod_) {}
 
-    int add(int a, int b) { return (a + b) % mod; }
-    int mul(long long a, int b) { return (a * b) % mod; }
-    int pow(long long a, int x) {
+    int add(int a, int b) const { return (a + b) % mod; }
+    int mul(long long a, int b) const { return (a * b) % mod; }
+    int pow(long long a, int x) const {
         int ans = 1;
         while (x) {
             if (x & 1) {
@@ -62,7 +82,7 @@ public:
         }
         return ans;
     }
-    int inv(int x) {
+    int inv(int x) const {
         return pow(x, mod - 2);
     }
 };
@@ -111,14 +131,12 @@ public:
     }
 };
 
-// ----------------------Template End----------------------
-
 class Dsu {
 public:
     int n;
     vector<int> f;
 
-    Dsu(int n_) : n(n_), f(n_) {
+    explicit Dsu(int n_) : n(n_), f(n_) {
         for(int i = 0; i < f.size(); i++) {
             f[i] = i;
         }
@@ -136,18 +154,21 @@ public:
     }
 };
 
+// ----------------------Template End----------------------
+
 class Solver {
 public:
-    int n, m;
+    int n{}, m{};
     vector<vector<int>> edges;
+    Mod mod{int(1e9) + 7};
     void read() {
-        IO::read(n);
-        IO::read(m);
+        Io::read(n);
+        Io::read(m);
         for(int i = 0; i < n; i++) {
             int sz;
             vector<int> a;
-            IO::read(sz);
-            IO::read_n(a, sz);
+            Io::read(sz);
+            Io::read(a, sz);
             if(a.size() == 1) {
                 a.push_back(0);
             }
@@ -168,10 +189,8 @@ public:
             }
         }
 
-        Mod mod(1e9 + 7);
-
-        IO::write(vector<int>{mod.pow(2, ans.size()), (int)ans.size()});
-        IO::write(ans);
+        Io::write(vector<int>{mod.pow(2, ans.size()), (int)ans.size()});
+        Io::write(ans);
     }
 };
 
@@ -183,7 +202,7 @@ int main() {
     init();
 
     int t = 1;
-    //IO::read(t);
+    //Io::read(t);
 
     while (t--) {
         Solver solver;
