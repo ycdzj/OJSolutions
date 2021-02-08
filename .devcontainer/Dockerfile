@@ -2,7 +2,7 @@ FROM debian:testing
 
 USER root
 
-RUN apt update -y && apt install -y git zsh build-essential neovim ranger curl wget locales nodejs npm apt-utils golang
+RUN apt update -y && apt install -y git zsh build-essential neovim ranger curl wget locales nodejs npm apt-utils golang clang clangd
 
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
