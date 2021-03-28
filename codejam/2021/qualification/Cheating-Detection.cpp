@@ -1,5 +1,4 @@
 #include <cstdio>
-#include <cmath>
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -9,10 +8,6 @@ const int MAXM = 10005;
 
 int n, m;
 char a[MAXN][MAXM];
-
-double get_x(double y) {
-    return log(y) - log(1 - y);
-}
 
 int main() {
     int t, p;
@@ -37,23 +32,24 @@ int main() {
             return cnt_correct[x] < cnt_correct[y];
         });
         int ans_idx = 0;
+        double ans_score = -1;
         for(int i = 0; i < n; i++) {
             int cnt_one = 0;
-            vector<double> x_list;
+            int cnt_inv = 0;
             for(int j = 0; j < m; j++) {
-                if(a[i][idx_list[j]] == '1') {
+                if(a[i][idx_list[j]] == '0') {
+                    cnt_inv += cnt_one;
+                } else {
                     cnt_one++;
                 }
-                if(j % 1000 == 999) {
-                    x_list.push_back(get_x((double)cnt_one / 1000));
-                    cnt_one = 0;
-                }
             }
-            printf("%d: ", i + 1);
-            for(int i = 1; i < x_list.size(); i++) {
-                printf("%.04f ", x_list[i] - x_list[i - 1]);
+            double score = cnt_inv;
+            score /= cnt_one;
+            score /= m - cnt_one;
+            if(score > ans_score) {
+                ans_score = score;
+                ans_idx = i;
             }
-            printf("\n");
         }
         printf("Case #%d: %d\n", i_case, ans_idx + 1);
     }
