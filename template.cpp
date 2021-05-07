@@ -41,6 +41,7 @@ public:
  
     static void write(int val) { printf("%d\n", val); }
     static void write(long long val) { printf("%lld\n", val); }
+    static void write(double val) { printf("%.8f\n", val); }
     static void write(const char *val) { printf("%s\n", val); }
     static void write(const string &val) { printf("%s\n", val.c_str()); }
     static void write(const vector<int> &val) {
@@ -58,6 +59,15 @@ public:
                 putchar(' ');
             }
             printf("%lld", val[i]);
+        }
+        putchar('\n');
+    }
+    static void write(const vector<double> &val) {
+        for (int i = 0; i < val.size(); i++) {
+            if (i > 0) {
+                putchar(' ');
+            }
+            printf("%.8f", val[i]);
         }
         putchar('\n');
     }
@@ -99,6 +109,10 @@ public:
         long long ans = gcd_ex(b, a % b, y, x);
         y -= (a / b) * x;
         return ans;
+    }
+    static long long gcd(long long a, long long b) {
+        long long x, y;
+        return gcd_ex(a, b, x, y);
     }
 };
  
