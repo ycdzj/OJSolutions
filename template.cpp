@@ -1,35 +1,33 @@
-#include <iostream>
-#include <vector>
 #include <algorithm>
-#include <queue>
-#include <set>
+#include <functional>
+#include <iostream>
 #include <map>
 #include <numeric>
-#include <functional>
+#include <queue>
+#include <set>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 
 using namespace std;
 
 class Solver {
-public:
-    void read() {
+ public:
+  void read() {
+  }
 
-    }
-
-    void solve() {
-
-    }
+  void solve() {
+  }
 };
 
 int main() {
-    ios::sync_with_stdio(false);
-    int t = 1;
-    // cin >> t;
-    while (t--) {
-        Solver solver;
-        solver.read();
-        solver.solve();
-    }
-    return 0;
+  ios::sync_with_stdio(false);
+  int t = 1;
+  // cin >> t;
+  while (t--) {
+    Solver solver;
+    solver.read();
+    solver.solve();
+  }
+  return 0;
 }
