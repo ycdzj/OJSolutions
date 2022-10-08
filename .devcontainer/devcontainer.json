@@ -1,0 +1,19 @@
+{
+	"name": "Debian",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"remoteUser": "root",
+	"features": {},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"llvm-vs-code-extensions.vscode-clangd",
+				"eamodio.gitlens"
+			]
+		}
+	},
+	"mounts": [
+		"source=ojsolutions-persisted-data,target=/persisted,type=volume"
+	]
+}
