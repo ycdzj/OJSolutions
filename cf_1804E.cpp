@@ -32,10 +32,20 @@ class Solver {
 
   void solve() {
     vector<vector<bool>> f((1 << n), vector<bool>(n));
-    vector<bool> g(1 << n);
+    vector<int> ans(n);
     for (int i = 0; i < n; i++) {
       f[1 << i][i] = true;
       for (int mask = (1 << i); mask < (1 << n); mask += (1 << (i + 1))) {
+        int cur_adj = mask;
+        for (int u = 0; u < n; u++) {
+          if (mask >> u & 1) {
+            for (int v : adj[u]) {
+              cur_adj = (cur_adj | (1 << v));
+              ans[v] = u;
+            }
+          }
+        }
+
         for (int v = i + 1; v < n; v++) {
           if ((mask >> v & 1) == 0) {
             continue;
@@ -46,42 +56,32 @@ class Solver {
               break;
             }
           }
-          if (f[mask][v]) {
+
+          if (cur_adj == ((1 << n) - 1) && f[mask][v]) {
             if (find(adj[v].begin(), adj[v].end(), i) != adj[v].end()) {
-              g[mask] = true;
+              ans[v] = i;
+              for (int u = v, cur_mask = mask; u != i; ) {
+                cur_mask ^= (1 << u);
+                for (int x : adj[u]) {
+                  if (f[cur_mask][x]) {
+                    ans[x] = u;
+                    u = x;
+                    break;
+                  }
+                }
+              }
+              cout << "Yes" << endl;
+              for (int val : ans) {
+                cout << val + 1 << ' ';
+              }
+              cout << endl;
+              return;
             }
           }
         }
       }
     }
 
-    for (int mask = 1; mask < (1 << n); mask++) {
-      if (g[mask]) {
-        int cur_adj = mask;
-        vector<int> nodes;
-        vector<int> ans(n);
-        for (int u = 0; u < n; u++) {
-          if (mask >> u & 1) {
-            nodes.push_back(u);
-            for (int v : adj[u]) {
-              cur_adj = (cur_adj | (1 << v));
-              ans[v] = u;
-            }
-          }
-        }
-        if (cur_adj == (1 << n) - 1) {
-          for (int i = 0; i < nodes.size(); i++) {
-            ans[nodes[i]] = nodes[(i + 1) % nodes.size()];
-          }
-          cout << "Yes" << endl;
-          for (int i = 0; i < n; i++) {
-            cout << ans[i] + 1 << ' ';
-          }
-          cout << endl;
-          return;
-        }
-      }
-    }
     cout << "No" << endl;
   }
 };
