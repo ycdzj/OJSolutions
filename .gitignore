@@ -1,7 +1,10 @@
 *.out
 *.txt
+*.dSYM
+tmp*
 build
 cmake-build-debug
 .idea
 .cache
 .DS_Store
+.ipynb_checkpoints
