@@ -13,20 +13,22 @@
 using namespace std;
 
 class Solver {
- public:
-  void read() {}
+   public:
+    void read() {
+    }
 
-  void solve() {}
+    void solve() {
+    }
 };
 
 int main() {
-  ios::sync_with_stdio(false);
-  int t = 1;
-  // cin >> t;
-  while (t--) {
-    Solver solver;
-    solver.read();
-    solver.solve();
-  }
-  return 0;
+    ios::sync_with_stdio(false);
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        Solver solver;
+        solver.read();
+        solver.solve();
+    }
+    return 0;
 }
