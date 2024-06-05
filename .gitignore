@@ -1,5 +1,6 @@
 *.out
 *.txt
+!compile_flags.txt
 *.dSYM
 tmp*
 build
